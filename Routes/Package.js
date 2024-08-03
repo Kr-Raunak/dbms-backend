@@ -2,19 +2,22 @@ const express = require("express");
 const router = express.Router();
 const db = require("../Db");
 
-router.post("/add_property_details", async (req, res) => {
+router.post("/Package", async (req, res) => {
   let {
-    prop_id,
-    area,
-    bedrooms,
-    swimming_pool,
-    city,
-    district,
-    house_no,
-    imge_link,
+    PackageID,
+    Type,
+    Weight,
+    DeliveryTime,
+    Status,
+    AccountID,
+    CreditCardNumber,
+    EmployeeID,
+    TruckID,
+    PlaneID,
+    WarehouseID
   } = req.body;
   try {
-    var sql = `INSERT INTO property_details VALUES  ('${prop_id}','${area}',${bedrooms},${swimming_pool},'${city}','${district}',${house_no},'${imge_link}')`;
+    var sql = `INSERT INTO Package VALUES  ('${PackageID}','${Type}',${Weight},'${DeliveryTime}','${Status}','${AccountID}','${CreditCardNumber}','${EmployeeID}','${TruckID}','${PlaneID}','${WarehouseID}')`;
     db.query(sql, function (err, result) {
       if (err) {
         return res.status(400).json({
@@ -24,7 +27,7 @@ router.post("/add_property_details", async (req, res) => {
       }
       return res.status(200).json({
         success: true,
-        message: `1 record created in Property Details Table`,
+        message: `1 record created in Package Table`,
       });
     });
   } catch (e) {

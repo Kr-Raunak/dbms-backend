@@ -2,18 +2,15 @@ const express = require("express");
 const router = express.Router();
 const db = require("../Db");
 
-router.post("/add_transaction_details", async (req, res) => {
+router.post("/loc_of_pkg", async (req, res) => {
   let {
-    transaction_id,
-    Date,
-    Final_Price,
-    buyer_id,
-    seller_id,
-    agent_id,
-    property_id,
+    PackageID,
+    WarehouseID,
+    Start_timestamp,
+    End_timestamp
   } = req.body;
   try {
-    var sql = `INSERT INTO transaction VALUES  ('${transaction_id}','${Date}',${Final_Price},'${buyer_id}','${seller_id}','${agent_id}','${property_id}')`;
+    var sql = `INSERT INTO loc_of_pkg VALUES  ('${PackageID}','${WarehouseID}',${Start_timestamp},'${End_timestamp}')`;
     db.query(sql, function (err, result) {
       if (err) {
         return res.status(400).json({
@@ -23,7 +20,7 @@ router.post("/add_transaction_details", async (req, res) => {
       }
       return res.status(200).json({
         success: true,
-        message: `1 record created in Transaction Table`,
+        message: `1 record created in loc_of_pkg Table`,
       });
     });
   } catch (e) {

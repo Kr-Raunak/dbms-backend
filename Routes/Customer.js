@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const db = require("../Db");
 
-router.post('/add_property', async (req, res) => {
-  let { prop_id,seller_id,sell_price,upload_date,status } = req.body;
+router.post('/Customer', async (req, res) => {
+  let { CustomerID, name, street, Address,Phone ,Email,BillingMethod } = req.body;
   try {
-    var sql = `INSERT INTO Property VALUES ('${prop_id}','${seller_id}','${sell_price}' ,'${upload_date}','${status}' )`;
+    var sql = `INSERT INTO Customer VALUES ('${CustomerID}','${name}','${street}','${Address}','${Phone}','${Email}',${BillingMethod}'')`;
     db.query(sql, function (err, result) {
         if (err) {
           return res.status(400).json({
@@ -15,7 +15,7 @@ router.post('/add_property', async (req, res) => {
         }
         return res.status(200).json({
           success: true,
-          message: `1 record created in Property Table`,
+          message: `1 record created in Customer Table`,
         });
       });
   } catch (e) {

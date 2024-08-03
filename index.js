@@ -1,14 +1,20 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 4000;
+const port = 3000;
 const cookieParser = require('cookie-parser');
 const db = require("./Db");
-const add_agent = require("./Routes/Add_buyer")
+const Customer = require("./Routes/Customer.js")
 const Viewdata = require("./Routes/Viewdata")
-const add_property = require("./Routes/Add_property")
-const add_transaction_details = require("./Routes/Add_transaction_details")
-const add_property_details = require("./Routes/Add_prop_details")
+const Employee = require("./Routes/Employee.js")
+const Package = require("./Routes/Package.js")
+const Account = require("./Routes/Account.js")
+const CreditCard= require("./Routes/CreditCard.js")
+const Truck= require("./Routes/Truck.js")
+const Plane= require("./Routes/Plane.js")
+const Warehouse= require("./Routes/Warehouse.js")
+const Orders= require("./Routes/Orders.js")
+const loc_of_pkg= require("./Routes/loc_of_pkg.js")
 db.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
@@ -27,11 +33,17 @@ app.use(
   );
 
 app.use(express.json())
-app.use("/api/v1" , add_agent);
+app.use("/api/v1" , Customer);
 app.use("/api/v1" , Viewdata);
-app.use("/api/v1" , add_transaction_details);
-app.use("/api/v1" , add_property);
-app.use("/api/v1" , add_property_details);
+app.use("/api/v1" , Package);
+app.use("/api/v1" , Employee);
+app.use("/api/v1" , Account);
+app.use("/api/v1" , CreditCard);
+app.use("/api/v1" , Truck);
+app.use("/api/v1" , Plane);
+app.use("/api/v1" , Warehouse);
+app.use("/api/v1" , Orders);
+app.use("/api/v1" , loc_of_pkg);
 
 app.get("/", (req,res) => {
     console.log(`Hello`);
